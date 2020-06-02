@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "668894796906",
+    "firebase_url": "https://cloudnotification-48b81.firebaseio.com",
+    "project_id": "cloudnotification-48b81",
+    "storage_bucket": "cloudnotification-48b81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668894796906:android:6b2d16e9f226081628fe13",
+        "android_client_info": {
+          "package_name": "com.example.sendmsgviafirebseopeninnewintent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668894796906-dm8r03muqo66io0oe4o5jcj792d4sk34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfyN8Utq86sgawzJi3cgUdiMjSVk-cM5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668894796906-dm8r03muqo66io0oe4o5jcj792d4sk34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
