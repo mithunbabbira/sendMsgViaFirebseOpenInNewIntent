@@ -2,6 +2,7 @@ package com.example.sendmsgviafirebseopeninnewintent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        if (getIntent().hasExtra("operatingSYS")){
+            Intent intent = new Intent(MainActivity.this,RecieveNotificationActivity.class);
+            intent.putExtra("brandID",getIntent().getStringExtra("operatingSYS"));
+            intent.putExtra("operatingSYS",getIntent().getStringExtra("brandId"));
+            startActivity(intent);
+        }
+
         Button button = findViewById(R.id.btn);
         mRequestQue = Volley.newRequestQueue(this);
         FirebaseMessaging.getInstance().subscribeToTopic("news");
@@ -63,14 +72,22 @@ public class MainActivity extends AppCompatActivity {
         //add main/parent/root name
         mainObj.put("to","/topics/"+"news");
 
-
-
         //below content is sent to other device
         JSONObject notificationOBJ = new JSONObject();
-        notificationOBJ.put("title","any title");
-        notificationOBJ.put("body","any .. body");
+        notificationOBJ.put("title","BABBIRA ");
+        notificationOBJ.put("body","MSG");
+
+        JSONObject extraData = new JSONObject();
+        extraData.put("brandID","ONEPLUS");
+        extraData.put("operatingSYS","ANDROID");
+
+
 
         mainObj.put("notification",notificationOBJ);
+        mainObj.put("data",extraData);
+
+
+
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
                 mainObj,
