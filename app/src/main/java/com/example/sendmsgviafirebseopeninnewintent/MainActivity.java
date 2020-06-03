@@ -6,11 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.btn);
         mRequestQue = Volley.newRequestQueue(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         });
     }
@@ -58,6 +71,34 @@ public class MainActivity extends AppCompatActivity {
         notificationOBJ.put("body","any .. body");
 
         mainObj.put("notification",notificationOBJ);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                mainObj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // success
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // error
+
+            }
+        }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                Map<String,String> header = new HashMap<>();
+                header.put("content-type","application/json");
+                header.put("authorization","key=AAAAm708nGo:APA91bGSqWOW9PmztijrhICFXuFpAkWfHDyXGnO_6IzjOcq4sZmpEgfZ8IDFOPCupjSGLz__sn-T1zvmOxPOy9xJLCgkP3OUlF9iADIk_eDD_omIJHs39OJI9uGTTM6etGQmu3-LlayR");
+                return header;
+            }
+        };
+
+        mRequestQue.add(request);
 
 
 
